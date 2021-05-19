@@ -17,7 +17,9 @@ local function indent()
     indent_goal = v.nvim_eval("indent(v:lnum)")
   end
 
-  if cursor[2] == 0 and line == "" and indent_goal ~= 0 then
+  -- TODO: Support indent_goal = -1, which means that we keep the previous
+  -- indentation
+  if cursor[2] == 0 and line == "" and indent_goal > 0 then
     local i = 0
     while i < indent_goal do
       v.nvim_feedkeys(" ", 'n', true)
