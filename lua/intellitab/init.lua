@@ -5,9 +5,17 @@ local function indent()
   local line = v.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], false)[1]
 
   -- TODO: support noexpand
-  -- TODO: Figure out when to use indent() and when to use cindent()
-  -- TODO: Problem with the C-O bind, because it brings the cursor back to start
-  local indent_goal = v.nvim_call_function("cindent", {cursor[1] + 1})
+  local indentexpr = v.nvim_buf_get_option(0, "indentexpr")
+  local indent_goal
+
+  -- TODO: Support treesitter indent
+  if indentexpr ~= "" then
+    indent_goal = v.nvim_eval(indentexpr)
+  elseif v.nvim_buf_get_option(0, "cindent") then
+    indent_goal = v.nvim_eval("cindent()")
+  else
+    indent_goal = v.nvim_eval("indent()")
+  end
 
   if cursor[2] == 0 and line == "" and indent_goal ~= 0 then
     local i = 0

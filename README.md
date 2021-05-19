@@ -8,7 +8,7 @@ specified location
 Install using your favourite package manager:
 
 ```vim
-Plug 'pta2002/intellitab'
+Plug 'pta2002/intellitab.nvim'
 ```
 
 Now, just rebind `<Tab>`:
