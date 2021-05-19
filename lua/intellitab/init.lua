@@ -6,6 +6,7 @@ local function indent()
 
   -- TODO: support noexpand
   local indentexpr = v.nvim_buf_get_option(0, "indentexpr")
+  local expand = v.nvim_buf_get_option(0, "expandtab")
   local indent_goal
 
   -- TODO: Support treesitter indent
@@ -19,7 +20,7 @@ local function indent()
 
   -- TODO: Support indent_goal = -1, which means that we keep the previous
   -- indentation
-  if cursor[2] == 0 and line == "" and indent_goal > 0 then
+  if cursor[2] == 0 and line == "" and indent_goal > 0 and expand then
     local i = 0
     while i < indent_goal do
       v.nvim_feedkeys(" ", 'n', true)
