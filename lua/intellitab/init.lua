@@ -18,6 +18,9 @@ local function indent()
     indent_goal = v.nvim_eval("indent(v:lnum)")
   end
 
+  -- Reset the cursor, since the functions are free to move it
+  nvim_win_set_cursor(0, cursor)
+
   -- TODO: Support indent_goal = -1, which means that we keep the previous
   -- indentation
   if cursor[2] == 0 and line == "" and indent_goal > 0 and expand then
