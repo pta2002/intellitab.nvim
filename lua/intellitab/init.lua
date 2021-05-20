@@ -19,7 +19,7 @@ local function indent()
   end
 
   -- Reset the cursor, since the functions are free to move it
-  nvim_win_set_cursor(0, cursor)
+  v.nvim_win_set_cursor(0, cursor)
 
   -- TODO: Support indent_goal = -1, which means that we keep the previous
   -- indentation
