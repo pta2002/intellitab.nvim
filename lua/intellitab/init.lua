@@ -29,9 +29,9 @@ local function indent()
   if indentexpr ~= "" then
     indent_goal = v.nvim_eval(indentexpr)
   elseif v.nvim_buf_get_option(0, "cindent") then
-    indent_goal = v.nvim_eval("cindent(v:lnum)")
+    indent_goal = v.nvim_call_function("cindent", {cursor[1]})
   else
-    indent_goal = v.nvim_eval("indent(v:lnum)")
+    indent_goal = v.nvim_call_function("indent", {cursor[1]})
   end
 
   if indent_goal == -1 and cursor[1] ~= 1 then
