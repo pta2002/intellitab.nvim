@@ -8,10 +8,6 @@ With IntelliTab, pressing Tab works like it does on editors such as VSCode, by
 indenting to the same place `smartindent` would have indented it to if it were
 a new line.
 
-## NOTE
-This plugin is not complete yet, for now it only works if you indent using
-spaces!
-
 ## Instalation
 Install using your favourite package manager:
 
