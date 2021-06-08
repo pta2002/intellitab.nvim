@@ -18,7 +18,6 @@ local function indent()
   local cursor = v.nvim_win_get_cursor(0)
   local line = v.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], false)[1]
 
-  -- TODO: support noexpand
   local indentexpr = v.nvim_buf_get_option(0, "indentexpr")
   local expand = v.nvim_buf_get_option(0, "expandtab")
   local shiftwidth = v.nvim_eval("shiftwidth()")
