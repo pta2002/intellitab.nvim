@@ -22,3 +22,14 @@ inoremap <Tab> <CMD>lua require("intellitab").indent()<CR>
 ```
 
 That's it!
+
+### If you are using CoC
+CoC wants to have its own binding for Tab, which means it won't be compatible with intellitab by default. A solution to this is to bind Tab to this instead:
+
+```vim
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? <CMD>lua require("intellitab").indent()<CR> :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+```

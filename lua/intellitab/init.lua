@@ -41,8 +41,6 @@ local function indent()
   -- Reset the cursor, since the functions are free to move it
   v.nvim_win_set_cursor(0, cursor)
 
-  -- TODO: Support indent_goal = -1, which means that we keep the previous
-  -- indentation
   if cursor[2] == 0 and line == "" and indent_goal > 0 then
     local i = 0
     while i < indent_goal do
