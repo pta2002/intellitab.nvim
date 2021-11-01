@@ -24,7 +24,11 @@ local function indent()
   local expand = v.nvim_buf_get_option(0, "expandtab")
   local shiftwidth = v.nvim_eval("shiftwidth()")
   local tab_char = v.nvim_replace_termcodes("<Tab>", true, true, true)
-  local indent_goal = treesitter.get_indent(line)
+  local indent_goal
+
+  if treesitter ~= nil then
+    indent_goal = treesitter.get_indent(line)
+  end
 
   if indent_goal == -1 then
     if indentexpr ~= "" then

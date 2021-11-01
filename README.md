@@ -33,3 +33,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 ```
+
+### If you are using nvim-cmp
+
