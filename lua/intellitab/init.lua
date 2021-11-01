@@ -1,5 +1,7 @@
 local v = vim.api
 
+local treesitter = require("nvim-treesitter")
+
 local function get_line_indent(line, sw)
   local indent = 0;
 
@@ -22,15 +24,16 @@ local function indent()
   local expand = v.nvim_buf_get_option(0, "expandtab")
   local shiftwidth = v.nvim_eval("shiftwidth()")
   local tab_char = v.nvim_replace_termcodes("<Tab>", true, true, true)
-  local indent_goal
+  local indent_goal = treesitter.get_indent(line)
 
-  -- TODO: Support treesitter indent
-  if indentexpr ~= "" then
-    indent_goal = v.nvim_eval(indentexpr)
-  elseif v.nvim_buf_get_option(0, "cindent") then
-    indent_goal = v.nvim_call_function("cindent", {cursor[1]})
-  else
-    indent_goal = v.nvim_call_function("indent", {cursor[1]})
+  if indent_goal == -1 then
+    if indentexpr ~= "" then
+      indent_goal = v.nvim_eval(indentexpr)
+    elseif v.nvim_buf_get_option(0, "cindent") then
+      indent_goal = v.nvim_call_function("cindent", {cursor[1]})
+    else
+      indent_goal = v.nvim_call_function("indent", {cursor[1]})
+    end
   end
 
   if indent_goal == -1 and cursor[1] ~= 1 then
