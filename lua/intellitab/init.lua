@@ -26,7 +26,7 @@ local function indent()
   local tab_char = v.nvim_replace_termcodes("<Tab>", true, true, true)
   local indent_goal
 
-  if treesitter ~= nil then
+  if treesitter ~= nil and treesitter.get_indent ~= nil then
     indent_goal = treesitter.get_indent(line)
   end
 
