@@ -30,7 +30,7 @@ local function indent()
     indent_goal = treesitter.get_indent(line)
   end
 
-  if indent_goal < 0 then
+  if indent_goal == nil or indent_goal < 0 then
     if indentexpr ~= "" then
       indent_goal = v.nvim_eval(indentexpr)
     elseif v.nvim_buf_get_option(0, "cindent") then
