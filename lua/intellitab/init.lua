@@ -30,7 +30,7 @@ local function indent()
     indent_goal = treesitter.get_indent(line)
   end
 
-  if indent_goal == -1 then
+  if indent_goal < 0 then
     if indentexpr ~= "" then
       indent_goal = v.nvim_eval(indentexpr)
     elseif v.nvim_buf_get_option(0, "cindent") then
@@ -48,7 +48,7 @@ local function indent()
   -- Reset the cursor, since the functions are free to move it
   v.nvim_win_set_cursor(0, cursor)
 
-  if cursor[2] == 0 and line == "" and indent_goal > 0 then
+  if cursor[2] == 0 and line == "" and indent_goal ~= nil and indent_goal > 0 then
     local i = 0
     while i < indent_goal do
       if expand then
