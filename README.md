@@ -35,4 +35,14 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 ```
 
 ### If you are using nvim-cmp
+On the `nvim-cmp` setup, add this binding for tab:
 
+```lua
+['<Tab>'] = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item() -- or whatever else you want nvim-cmp to do when you press tab
+  else
+    require("intellitab").indent()
+  end
+end
+```
