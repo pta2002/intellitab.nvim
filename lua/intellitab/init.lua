@@ -20,8 +20,8 @@ local function indent()
   local cursor = v.nvim_win_get_cursor(0)
   local line = v.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], false)[1]
 
-  local indentexpr = v.nvim_buf_get_option(0, "indentexpr")
-  local expand = v.nvim_buf_get_option(0, "expandtab")
+  local indentexpr = v.nvim_get_option_value("indentexpr", { buf = 0 })
+  local expand = v.nvim_get_option_value("expandtab", { buf = 0 })
   local shiftwidth = v.nvim_eval("shiftwidth()")
   local tab_char = v.nvim_replace_termcodes("<Tab>", true, true, true)
   local indent_goal
@@ -33,7 +33,7 @@ local function indent()
   if indent_goal == nil or indent_goal < 0 then
     if indentexpr ~= "" then
       indent_goal = v.nvim_eval(indentexpr)
-    elseif v.nvim_buf_get_option(0, "cindent") then
+    elseif v.nvim_get_option_value("cindent", { buf = 0 }) then
       indent_goal = v.nvim_call_function("cindent", {cursor[1]})
     else
       indent_goal = v.nvim_call_function("indent", {cursor[1]})
