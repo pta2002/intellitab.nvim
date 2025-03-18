@@ -59,7 +59,6 @@ local function indent()
         i = i + shiftwidth
       end
     end
-    print(i, indent_goal)
   else
     v.nvim_feedkeys(tab_char, 'n', true)
   end
